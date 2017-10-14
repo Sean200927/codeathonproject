@@ -1,0 +1,19 @@
+{
+  "users" : {
+      "user1" : {
+        "email" : "alovelace@gmail.com",
+        "first_name" : "ada",
+        "industry" : "Information Technology",
+        "last_name" : "lovelace",
+        "mentor" : true
+      },
+      "user2" : {
+        "email" : "jsavage42@ku.edu",
+        "first_name" : "jason",
+        "industry" : "Information Technology",
+        "last_name" : "savage",
+        "mentor" : false,
+        "school" : "University of Kansas"
+      }
+    }
+}
