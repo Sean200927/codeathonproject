@@ -15,5 +15,27 @@
         "mentor" : false,
         "school" : "University of Kansas"
       }
-    }
+    },
+	"chats": {
+		"one": {
+			"title": "Test",
+			"lastMessage": "ada: Hi.",
+			"timestampe" : 1459361875666
+		}
+	},
+	"members": {
+		"one": {
+			"alovelace": true,
+			"jsavage": true
+		}
+	},
+	"messages": {
+		"one": {
+			"m1": {
+				"name": "alovelace",
+				"message": "Hi.",
+				"timestamp": 1459361875666
+			}
+		}
+	}
 }
