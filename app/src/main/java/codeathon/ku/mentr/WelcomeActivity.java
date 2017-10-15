@@ -15,7 +15,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-
 public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView mUsername;
@@ -27,6 +26,7 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
     //Declare Firebase Authorization
     private FirebaseAuth mAuth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,12 +37,12 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         mPassword = (TextView) findViewById(R.id.passwordLogin);
 
         //Buttons
-
         findViewById(R.id.loginButton).setOnClickListener(this);
         findViewById(R.id.signUpButton).setOnClickListener(this);
 
         //Initialize authorization
         mAuth = FirebaseAuth.getInstance();
+
     }
 
     @Override
@@ -144,10 +144,12 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         }
         if( i == R.id.loginButton) {
             if(1 == 1) {
+                signIn(mUsername.getText().toString(), mPassword.getText().toString());
                 Intent intent = new Intent(this, mentorActivity.class);
                 startActivity(intent);
             }
             else {
+                signIn(mUsername.getText().toString(), mPassword.getText().toString());
                 Intent intent = new Intent(this, studentActivity.class);
                 startActivity(intent);
             }

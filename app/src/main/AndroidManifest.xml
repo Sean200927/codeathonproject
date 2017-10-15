@@ -17,28 +17,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:parentActivityName=".WelcomeActivity" />
-        <activity
             android:name=".SignupActivity"
             android:parentActivityName=".WelcomeActivity" />
         <activity
             android:name=".mentorActivity"
             android:label="@string/title_activity_mentor"
-            android:parentActivityName=".LoginActivity"
+            android:parentActivityName=".WelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="codeathon.ku.mentr.LoginActivity" />
+                android:value="codeathon.ku.mentr.WelcomeActivity" />
         </activity>
         <activity
             android:name=".studentActivity"
             android:label="@string/title_activity_student"
-            android:parentActivityName=".LoginActivity"
+            android:parentActivityName=".WelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="codeathon.ku.mentr.LoginActivity" />
+                android:value="codeathon.ku.mentr.WelcomeActivity" />
         </activity>
     </application>
 
