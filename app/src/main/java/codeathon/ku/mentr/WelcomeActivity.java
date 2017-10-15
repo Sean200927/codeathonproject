@@ -129,7 +129,18 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         int i = v.getId();
         if( i == R.id.signUpButton) {
-            createAccount(mUsername.getText().toString(), mPassword.getText().toString());
+            if(validateForm()) {
+                //Success
+                createAccount(mUsername.getText().toString(), mPassword.getText().toString());
+                Intent intent = new Intent(this, SignupActivity.class);
+                startActivity(intent);
+                Log.d(TAG, "Create your account");
+            }
+            else {
+                //Failure
+                Log.w(TAG, "signInWithEmail:failure");
+                Toast.makeText(WelcomeActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+            }
         }
         if( i == R.id.loginButton) {
             if(1 == 1) {
