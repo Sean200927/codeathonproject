@@ -8,12 +8,9 @@ import android.widget.*;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import static codeathon.ku.mentr.R.id.firstName;
-import static codeathon.ku.mentr.R.id.lastName;
-import static codeathon.ku.mentr.R.id.username;
 
 public class SignupActivity extends AppCompatActivity {
-
+    //Finals for required items and password mismatch
     private static final String REQUIRED = "Required";
     private static final String NOMATCH = "Passwords Must Match";
 
@@ -21,6 +18,7 @@ public class SignupActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference users = database.getReference("users");
 
+    //Initialize variables
     private EditText newFirstName;
     private EditText newLastName;
     private EditText newUsername;
@@ -31,6 +29,7 @@ public class SignupActivity extends AppCompatActivity {
     private RadioButton newStudentButton;
     private RadioButton newMentorButton;
 
+    //Happens when opened.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +45,7 @@ public class SignupActivity extends AppCompatActivity {
         newStudentButton = (RadioButton) findViewById(R.id.studentRadio);
         newMentorButton = (RadioButton) findViewById(R.id.mentorRadio);
 
+        //Listens for click, when clicked run createNewUser
         newSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +55,7 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
+    //Create new user. Check for proper inputs. Input in Firebase.
     private void createNewUser() {
         final String first = newFirstName.getText().toString();
         final String last = newLastName.getText().toString();
@@ -88,7 +89,6 @@ public class SignupActivity extends AppCompatActivity {
             newPasswordConfirm.setError(REQUIRED);
             return;
         }
-
         if (!pass.equals(passc)) {
             newPasswordConfirm.setError(NOMATCH);
             return;
@@ -98,6 +98,7 @@ public class SignupActivity extends AppCompatActivity {
         setEditingEnabled(false);
         Toast.makeText(this, "Signing up...", Toast.LENGTH_SHORT).show();
 
+        //Add user to Database.
         users.child(username).child("first").setValue(first);
         users.child(username).child("last").setValue(last);
         users.child(username).child("email").setValue(email);
@@ -107,6 +108,7 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
+    //Disable editing while creating user.
     private void setEditingEnabled(boolean enabled) {
         newFirstName.setEnabled(enabled);
         newLastName.setEnabled(enabled);
@@ -115,12 +117,11 @@ public class SignupActivity extends AppCompatActivity {
         newPassword.setEnabled(enabled);
         newPasswordConfirm.setEnabled(enabled);
 
+        //Makes Sign Up Button disappear
         if (enabled) {
             newSignUpButton.setVisibility(View.VISIBLE);
         } else {
             newSignUpButton.setVisibility(View.GONE);
         }
     }
-
-
 }

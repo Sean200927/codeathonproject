@@ -16,10 +16,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"
-            android:parentActivityName=".WelcomeActivity"/>
-        <activity android:name=".SignupActivity"
+        <activity
+            android:name=".LoginActivity"
             android:parentActivityName=".WelcomeActivity" />
+        <activity
+            android:name=".SignupActivity"
+            android:parentActivityName=".WelcomeActivity" />
+        <activity
+            android:name=".mentorActivity"
+            android:label="@string/title_activity_mentor"
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="codeathon.ku.mentr.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".studentActivity"
+            android:label="@string/title_activity_student"
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="codeathon.ku.mentr.LoginActivity" />
+        </activity>
     </application>
 
 </manifest>

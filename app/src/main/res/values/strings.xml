@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Mentr</string>
+    <string name="title_activity_mentor">mentorActivity</string>
+    <string name="title_activity_student">studentActivity</string>
 </resources>
