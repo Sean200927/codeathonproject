@@ -10,9 +10,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupActivity extends AppCompatActivity {
-    //Finals for required items and password mismatch
+
+    //Finals for required items
     private static final String REQUIRED = "Required";
-    private static final String NOMATCH = "Passwords Must Match";
 
     //Initialize Database
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -21,10 +21,6 @@ public class SignupActivity extends AppCompatActivity {
     //Initialize variables
     private EditText newFirstName;
     private EditText newLastName;
-    private EditText newUsername;
-    private EditText newEmail;
-    private EditText newPassword;
-    private EditText newPasswordConfirm;
     private Button newSignUpButton;
     private RadioButton newStudentButton;
     private RadioButton newMentorButton;
@@ -37,10 +33,6 @@ public class SignupActivity extends AppCompatActivity {
 
         newFirstName = (EditText) findViewById(R.id.firstName);
         newLastName = (EditText) findViewById(R.id.lastName);
-        newUsername = (EditText) findViewById(R.id.username);
-        newEmail = (EditText) findViewById(R.id.email);
-        newPassword = (EditText) findViewById(R.id.password);
-        newPasswordConfirm = (EditText) findViewById(R.id.passwordConfirm);
         newSignUpButton = (Button) findViewById(R.id.signUpButton);
         newStudentButton = (RadioButton) findViewById(R.id.studentRadio);
         newMentorButton = (RadioButton) findViewById(R.id.mentorRadio);
@@ -57,40 +49,16 @@ public class SignupActivity extends AppCompatActivity {
 
     //Create new user. Check for proper inputs. Input in Firebase.
     private void createNewUser() {
-        final String first = newFirstName.getText().toString();
-        final String last = newLastName.getText().toString();
-        final String username = newUsername.getText().toString();
-        final String email = newEmail.getText().toString();
-        final String pass = newPassword.getText().toString();
-        final String passc = newPasswordConfirm.getText().toString();
-
+        final String FIRST = newFirstName.getText().toString();
+        final String LAST = newLastName.getText().toString();
+        final String EMAIL = "FILLER";
         //Name required
-        if (TextUtils.isEmpty(first)) {
+        if (TextUtils.isEmpty(FIRST)) {
             newFirstName.setError(REQUIRED);
             return;
         }
-        if (TextUtils.isEmpty(last)) {
+        if (TextUtils.isEmpty(LAST)) {
             newLastName.setError(REQUIRED);
-            return;
-        }
-
-        //Email required
-        if (TextUtils.isEmpty(email)) {
-            newEmail.setError(REQUIRED);
-            return;
-        }
-
-        //Password required. Also passwords must match
-        if (TextUtils.isEmpty(pass)) {
-            newPassword.setError(REQUIRED);
-            return;
-        }
-        if (TextUtils.isEmpty(passc)) {
-            newPasswordConfirm.setError(REQUIRED);
-            return;
-        }
-        if (!pass.equals(passc)) {
-            newPasswordConfirm.setError(NOMATCH);
             return;
         }
 
@@ -99,23 +67,19 @@ public class SignupActivity extends AppCompatActivity {
         Toast.makeText(this, "Signing up...", Toast.LENGTH_SHORT).show();
 
         //Add user to Database.
-        users.child(username).child("first").setValue(first);
-        users.child(username).child("last").setValue(last);
-        users.child(username).child("email").setValue(email);
-        if(newStudentButton.isChecked()) {
-            users.child(username).child("mentor").setValue(false);
-        } else { users.child(username).child("mentor").setValue(true);}
-
+        users.child(EMAIL).child("first").setValue(FIRST);
+        users.child(EMAIL).child("last").setValue(LAST);
+         if(newStudentButton.isChecked()) {
+            users.child(EMAIL).child("mentor").setValue(false);
+        } else if (newMentorButton.isChecked()){
+             users.child(EMAIL).child("mentor").setValue(true);
+        }
     }
 
     //Disable editing while creating user.
     private void setEditingEnabled(boolean enabled) {
         newFirstName.setEnabled(enabled);
         newLastName.setEnabled(enabled);
-        newUsername.setEnabled(enabled);
-        newEmail.setEnabled(enabled);
-        newPassword.setEnabled(enabled);
-        newPasswordConfirm.setEnabled(enabled);
 
         //Makes Sign Up Button disappear
         if (enabled) {

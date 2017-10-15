@@ -155,4 +155,8 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
             }
         }
     }
+
+    public String getUsername() {
+        return mUsername.getText().toString();
+    }
 }
