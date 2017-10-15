@@ -6,17 +6,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.*;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.IgnoreExtraProperties;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import static codeathon.ku.mentr.R.id.firstName;
 import static codeathon.ku.mentr.R.id.lastName;
 import static codeathon.ku.mentr.R.id.username;
@@ -37,19 +28,23 @@ public class SignupActivity extends AppCompatActivity {
     private EditText newPassword;
     private EditText newPasswordConfirm;
     private Button newSignUpButton;
+    private RadioButton newStudentButton;
+    private RadioButton newMentorButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        newFirstName = (EditText) findViewById(firstName);
-        newLastName = (EditText) findViewById(lastName);
-        newUsername = (EditText) findViewById(username);
+        newFirstName = (EditText) findViewById(R.id.firstName);
+        newLastName = (EditText) findViewById(R.id.lastName);
+        newUsername = (EditText) findViewById(R.id.username);
         newEmail = (EditText) findViewById(R.id.email);
         newPassword = (EditText) findViewById(R.id.password);
         newPasswordConfirm = (EditText) findViewById(R.id.passwordConfirm);
         newSignUpButton = (Button) findViewById(R.id.signUpButton);
+        newStudentButton = (RadioButton) findViewById(R.id.studentRadio);
+        newMentorButton = (RadioButton) findViewById(R.id.mentorRadio);
 
         newSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,27 +98,12 @@ public class SignupActivity extends AppCompatActivity {
         setEditingEnabled(false);
         Toast.makeText(this, "Signing up...", Toast.LENGTH_SHORT).show();
 
-        users.child("users").setValue(username);
         users.child(username).child("first").setValue(first);
         users.child(username).child("last").setValue(last);
         users.child(username).child("email").setValue(email);
-
-    }
-
-    @IgnoreExtraProperties
-    public static class User {
-
-        public String firstName;
-        public String lastName;
-        public String username;
-
-        public User(String firstName, String lastName) {
-            // ...
-        }
-
-        public User(String firstName, String lastName, String username) {
-            // ...
-        }
+        if(newStudentButton.isChecked()) {
+            users.child(username).child("mentor").setValue(false);
+        } else { users.child(username).child("mentor").setValue(true);}
 
     }
 
